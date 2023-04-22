@@ -11,6 +11,38 @@ namespace tournament_system_dotnet.all_class
     {
         string connection = "Data Source=LAPTOP-J4FO9U9C\\SQLEXPRESS;Initial Catalog=\"tournament system 2\";Integrated Security=True";
 
+        public List<prizeClass> getAllOrganizerPrizeForTurnament(int tournamentID)
+        {
+            List<prizeClass> prizes = new List<prizeClass>();
+            SqlConnection con = new SqlConnection(connection);
+            SqlCommand command1 = new SqlCommand(" SELECT *  from dbo.prize where tournament_id=@tournament_id ", con);
+            command1.Parameters.AddWithValue("@tournament_id", tournamentID);
+            SqlDataReader myreader;
+
+            try
+            {
+                con.Open();
+                myreader = command1.ExecuteReader();
+                while (myreader.Read())
+                {
+                    prizeClass a = new prizeClass();
+                    a.prizeId = myreader.GetInt32("prize_id");
+                    a.prizeName = myreader.GetString("prize_name");
+                    a.tournamentId_inprize = tournamentID;
+                    a.prizeNumber = myreader.GetInt32("prize_number");
+                    a.prizeAmount = myreader.GetInt32("prize_amount");
+
+
+                    prizes.Add(a);
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+            }
+            return prizes;
+        }
+
         public List<tournamentClass> getAllTournamentForOrganizerfinishied(int ID)//load tournament for selected organizer finised
         {
            
@@ -125,8 +157,11 @@ namespace tournament_system_dotnet.all_class
             }
             con.Close();
         }
+        //""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        //public tournamentClass getSavetournzment()
+        //{
 
-        
+        //}
         public void SaveTurnament(tournamentClass model,int tournamentRoundsNumber) /////////////whene first turnament is created///////////////////
         {
             int tournamentStatus = 1;

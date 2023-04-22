@@ -126,6 +126,7 @@ namespace tournament_system_dotnet
             this.Controls.Add(this.label1);
             this.Name = "OrganizerDash";
             this.Text = "OrganizerDash";
+            this.Load += new System.EventHandler(this.OrganizerDash_Load);
             ((System.ComponentModel.ISupportInitialize)(this.profile_icon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

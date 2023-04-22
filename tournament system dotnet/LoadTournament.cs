@@ -12,10 +12,18 @@ namespace tournament_system_dotnet
     public partial class LoadTournament : Form
     {
         tournamentClass selectedtournament = new tournamentClass();
+        sqlConnectionClass x = new sqlConnectionClass();
         public LoadTournament(tournamentClass selectedtournament__)
         {
             this.selectedtournament = selectedtournament__;
+            this.selectedtournament.enteredPeizes = getAllPrizees(selectedtournament);
             InitializeComponent();
+        }
+        public List<prizeClass> getAllPrizees(tournamentClass tournamet)
+        {
+            List<prizeClass> prizes = new List<prizeClass>();
+            prizes= x.getAllOrganizerPrizeForTurnament(tournamet.tournamentId);
+            return prizes;
         }
 
         public LoadTournament()
@@ -29,6 +37,11 @@ namespace tournament_system_dotnet
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

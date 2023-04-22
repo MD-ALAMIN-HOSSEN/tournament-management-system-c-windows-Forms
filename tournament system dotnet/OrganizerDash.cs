@@ -104,5 +104,10 @@ namespace tournament_system_dotnet
             //d1.ShowDialog();
             //this.Show();
         }
+
+        private void OrganizerDash_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

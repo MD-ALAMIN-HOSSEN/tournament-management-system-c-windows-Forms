@@ -132,6 +132,7 @@ namespace tournament_system_dotnet
             this.button1.TabIndex = 8;
             this.button1.Text = "Update";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // t1Score
             // 

@@ -1,0 +1,32 @@
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\tournament system dotnet.exe
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\tournament system dotnet.deps.json
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\tournament system dotnet.runtimeconfig.json
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\tournament system dotnet.runtimeconfig.dev.json
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\tournament system dotnet.dll
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\tournament system dotnet.pdb
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.Create_new_tournament.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.Create_Prize.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.Create_team.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.Create_user.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.LoadTournament.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.login.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.OrganizerDash.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.PlayerDash.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.Properties.Resources.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.update_profile.resources
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.csproj.GenerateResource.cache
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.AssemblyInfoInputs.cache
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.AssemblyInfo.cs
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.csproj.CopyComplete
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.dll
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.pdb
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.genruntimeconfig.cache
+C:\Users\Acer\Desktop\tournament system dotnet core\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system dotnet.csproj.AssemblyReference.cache

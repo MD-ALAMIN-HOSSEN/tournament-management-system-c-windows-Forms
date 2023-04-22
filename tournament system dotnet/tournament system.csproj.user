@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="Create_new_tournament.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Create_Prize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Create_team.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Create_user.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="LoadTournament.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OrganizerDash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PlayerDash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="update_profile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

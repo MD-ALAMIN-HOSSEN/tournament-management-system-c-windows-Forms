@@ -13,7 +13,7 @@ namespace tournament_system_dotnet.all_class
         /// <summary>
         /// player id
         /// </summary>
-        public int playerId { get; set; }
+       public int playerId { get; set; }
 
         /// <summary>
         ///  team Name 

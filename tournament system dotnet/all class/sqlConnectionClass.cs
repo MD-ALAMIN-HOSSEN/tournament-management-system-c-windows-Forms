@@ -11,6 +11,89 @@ namespace tournament_system_dotnet.all_class
     {
         string connection = "Data Source=LAPTOP-J4FO9U9C\\SQLEXPRESS;Initial Catalog=\"tournament system 2\";Integrated Security=True";
 
+        public List<List<matchClass>> getAllroundforTournamentLOad (tournamentClass tournamet)
+        {
+            List<List<matchClass>> allRounds = new List<List<matchClass>>();
+            for(int match_round=1; match_round<= tournamet.TournamentRound; match_round++)
+            {
+                List<matchClass>Rounds = new List<matchClass>();
+                //get mach details for first round andd addthem to a list
+                SqlConnection con = new SqlConnection(connection);
+                SqlCommand command1 = new SqlCommand(" SELECT *  from dbo.match where tournament_id=@tournament_id AND match_round=@match_round ", con);
+                command1.Parameters.AddWithValue("@tournament_id", tournamet.tournamentId);
+                command1.Parameters.AddWithValue("@match_round", match_round);
+                SqlDataReader myreader;
+
+                try
+                {
+                    con.Open();
+                    myreader = command1.ExecuteReader();
+                    while (myreader.Read())
+                    {
+                        matchClass a = new matchClass();
+                        a.matchId = myreader.GetInt32("match_id");
+                        a.matchRound = match_round;
+                        
+                        if (myreader["match_winner(team_id)"] != DBNull.Value)
+                        {
+                            // get winer team id 
+                            int winer_team_id = myreader.GetInt32("[match_winner(team_id)]");
+                            //load team add to the match
+                            a.winner = getTeamById(winer_team_id);
+                        }
+                        
+
+                        Rounds.Add(a);
+                    }
+                    allRounds.Add(Rounds);
+                       con.Close();
+                 }
+                catch (Exception ex)
+                {
+                  
+                }
+                
+
+            }
+            return allRounds;
+        }
+
+        /// <summary>
+        /// unchaked output
+        /// </summary>
+        /// <param name="winer_team_id"></param>
+        /// <returns></returns>
+        public teamClass getTeamById(int winer_team_id)
+        {
+            teamClass team = new teamClass();
+            SqlConnection con = new SqlConnection(connection);
+            SqlCommand command1 = new SqlCommand(" SELECT *  from dbo.team where team_id=@team_id", con);
+            command1.Parameters.AddWithValue("@team_id", winer_team_id);
+            
+            SqlDataReader myreader;
+            con.Open();
+            myreader = command1.ExecuteReader();
+            while (myreader.Read())
+            {
+                team.teamName = myreader.GetString("team_name");
+                
+            }
+
+            SqlCommand command2 = new SqlCommand(" SELECT *  from dbo.team_member where team_id=@team_id", con);
+            command2.Parameters.AddWithValue("@team_id", winer_team_id);
+
+            SqlDataReader myreader2;
+            con.Open();
+            myreader2 = command2.ExecuteReader();
+            while (myreader2.Read())
+            {
+                int player_ID = myreader2.GetInt32("player_id");
+                team.teamMembers.Add(getPlayerdetailsWith_id(player_ID)) ;
+            }
+            con.Close();
+            return team;
+        }
+
         public List<prizeClass> getAllOrganizerPrizeForTurnament(int tournamentID)
         {
             List<prizeClass> prizes = new List<prizeClass>();

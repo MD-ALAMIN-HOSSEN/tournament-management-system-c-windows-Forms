@@ -17,15 +17,22 @@ namespace tournament_system_dotnet
         {
             this.selectedtournament = selectedtournament__;
             this.selectedtournament.enteredPeizes = getAllPrizees(selectedtournament);
-            this.selectedtournament.AllRounds = getAllRounds(selectedtournament);
+            this.selectedtournament.AllRounds = getAllRounds(selectedtournament);           
+            this.selectedtournament.enteredTeams = getAllEnteredTeams(selectedtournament);
             //load team participents
             InitializeComponent();
         }
 
+        public List<teamClass> getAllEnteredTeams(tournamentClass tournamet)
+        {
+            List<teamClass> EnteredTeams = new List<teamClass>();
+            EnteredTeams = x.getTournamentEnteredTeams(tournamet.tournamentId);
+            return EnteredTeams;
+        }
         public List<List<matchClass>> getAllRounds(tournamentClass tournamet)
         {
             List<List<matchClass>> allRounds = new List<List<matchClass>>();
-            allRounds = x.getAllroundforTournamentLOad( tournamet);
+            allRounds = x.getAllroundforTournamentLOad(tournamet);
             return allRounds;
         }
         public List<prizeClass> getAllPrizees(tournamentClass tournamet)

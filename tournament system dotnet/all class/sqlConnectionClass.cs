@@ -11,6 +11,36 @@ namespace tournament_system_dotnet.all_class
     {
         string connection = "Data Source=LAPTOP-J4FO9U9C\\SQLEXPRESS;Initial Catalog=\"tournament system 2\";Integrated Security=True";
 
+        public List<teamClass> getTournamentEnteredTeams(int tournametID)
+        {
+            List<teamClass> EnteredTeams = new List<teamClass>();
+            SqlConnection con = new SqlConnection(connection);
+            SqlCommand command1 = new SqlCommand(" SELECT *  from dbo.tournament_teams where tournament_id=@tournament_id ", con);
+            command1.Parameters.AddWithValue("@tournament_id", tournametID);
+            SqlDataReader myreader;
+            try
+            {
+                con.Open();
+                myreader = command1.ExecuteReader();
+                while (myreader.Read())
+                {
+                    teamClass  a = new teamClass();
+                    int teamID= myreader.GetInt32("team_id");
+                     
+                    a = getTeamById(teamID);
+                    EnteredTeams.Add(a);
+                }
+                
+                  con.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return EnteredTeams;                                                                  ///////last team member loading?????????????/////////
+        }
+
+       
         public List<List<matchClass>> getAllroundforTournamentLOad (tournamentClass tournamet)
         {
             List<List<matchClass>> allRounds = new List<List<matchClass>>();
@@ -67,18 +97,18 @@ namespace tournament_system_dotnet.all_class
         {
             teamClass team = new teamClass();
             SqlConnection con = new SqlConnection(connection);
-            SqlCommand command1 = new SqlCommand(" SELECT *  from dbo.team where team_id=@team_id", con);
-            command1.Parameters.AddWithValue("@team_id", winer_team_id);
+            SqlCommand command12 = new SqlCommand(" SELECT *  from dbo.team where team_id=@team_id", con);
+            command12.Parameters.AddWithValue("@team_id", winer_team_id);
             
             SqlDataReader myreader;
             con.Open();
-            myreader = command1.ExecuteReader();
+            myreader = command12.ExecuteReader();
             while (myreader.Read())
             {
                 team.teamName = myreader.GetString("team_name");
-                
+                team.teamId = winer_team_id;
             }
-
+            con.Close();
             SqlCommand command2 = new SqlCommand(" SELECT *  from dbo.team_member where team_id=@team_id", con);
             command2.Parameters.AddWithValue("@team_id", winer_team_id);
 
@@ -87,7 +117,8 @@ namespace tournament_system_dotnet.all_class
             myreader2 = command2.ExecuteReader();
             while (myreader2.Read())
             {
-                int player_ID = myreader2.GetInt32("player_id");
+                int player_ID;
+                player_ID = myreader2.GetInt32("player_id");
                 team.teamMembers.Add(getPlayerdetailsWith_id(player_ID)) ;
             }
             con.Close();
@@ -241,12 +272,25 @@ namespace tournament_system_dotnet.all_class
             con.Close();
         }
         //""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-        //public tournamentClass getSavetournzment()
-        //{
+        public void save_tournament_team(tournamentClass model)
+        {
+            SqlConnection con = new SqlConnection(connection);
+            con.Open();
+            foreach (teamClass team in model.enteredTeams)
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO dbo.tournament_teams (tournament_id,team_id) VALUES (@tournament_id,@team_id)", con);
 
-        //}
+                cmd.Parameters.AddWithValue("@tournament_id", model.tournamentId);
+                cmd.Parameters.AddWithValue("@team_id", team.teamId);
+                cmd.ExecuteNonQuery();
+            }
+
+            con.Close();
+
+        }
         public void SaveTurnament(tournamentClass model,int tournamentRoundsNumber) /////////////whene first turnament is created///////////////////
         {
+            
             int tournamentStatus = 1;
             int tournamentCurrentRound = 1;
             SqlConnection con = new SqlConnection(connection);
@@ -264,6 +308,8 @@ namespace tournament_system_dotnet.all_class
             command.Parameters.AddWithValue("@tournament_name", model.tournamentName);           
             model.tournamentId = (int)(command.ExecuteScalar());
             con.Close();
+            //////////////////////////////
+            save_tournament_team(model);
             //saving prize
             savePrize(model.enteredPeizes, model.tournamentId);
             // saving match and match participent
@@ -376,12 +422,13 @@ namespace tournament_system_dotnet.all_class
             myreader.Read();
                 // (player_id,player_name, player_password, player_email, player_number)
 
-            a.playerName = myreader.GetString("player_name");
+                a.playerName = myreader.GetString("player_name");
                 a.playerPassword = myreader.GetString("player_password");
                 a.playerEmail = myreader.GetString("player_email");
                 a.playerNumber = myreader.GetInt32("player_number");
-                
-            
+                a.playerId = playerid;
+
+
                return a;
         }
 

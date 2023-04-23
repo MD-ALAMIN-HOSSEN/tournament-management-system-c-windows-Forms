@@ -69,6 +69,8 @@ namespace tournament_system_dotnet
             Create_new_tournament forme = new Create_new_tournament(Id);
             forme.ShowDialog();
             this.Show();
+            getallTournament(Id);
+            wireforme();
         }
 
         private void profile_icon_Click(object sender, EventArgs e)

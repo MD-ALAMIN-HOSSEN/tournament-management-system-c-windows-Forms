@@ -11,6 +11,83 @@ namespace tournament_system_dotnet.all_class
     {
         string connection = "Data Source=LAPTOP-J4FO9U9C\\SQLEXPRESS;Initial Catalog=\"tournament system 2\";Integrated Security=True";
 
+        public List<List<matchClass>>  getAllmatchParticipentAndScore (tournamentClass tournament)
+        {
+            List<List<matchClass>> allRounds = new List<List<matchClass>>();
+            allRounds = tournament.AllRounds;
+            foreach (List<matchClass> round in allRounds)
+            {
+                foreach (matchClass match in round)
+                {
+                    List<matchParticipentTeamClass> matchparticipent = new List<matchParticipentTeamClass>();
+                    SqlConnection con = new SqlConnection(connection);
+                    SqlCommand command1 = new SqlCommand(" SELECT *  from dbo.match_participant where match_idd=@match_idd ", con);
+                    command1.Parameters.AddWithValue("@match_idd", match.matchId);
+                    SqlDataReader myreader;
+                    try
+                    {
+                        con.Open();
+                        myreader = command1.ExecuteReader();
+                        while (myreader.Read())
+                        {
+                            matchParticipentTeamClass a = new matchParticipentTeamClass();
+
+                            a.matchParticipentTeamClassId = myreader.GetInt32("match_participant_id");
+                            
+                            if (myreader["match_participant_score"] != DBNull.Value)
+                            {
+                                 a.score = myreader.GetInt32("match_participant_score");
+      
+                            }
+                            //[[match_participant_team(team_id)]=match_participant_team(team_id)
+                            //[match_participant_parent_match(match_id)]=match_participant_parent_match(match_id)
+
+                            if (myreader["match_participant_team(team_id)"] != DBNull.Value)
+                            {
+                                int teamID = myreader.GetInt32("match_participant_team(team_id)");
+                                a.matchParticipentTeam = getTeamById(teamID);
+                            }
+                            if (myreader["match_participant_parent_match(match_id)"] != DBNull.Value)
+                            {
+                                int parantMatchID = myreader.GetInt32("match_participant_parent_match(match_id)");
+                                a.parantMatch = getParantmatchByID(parantMatchID, allRounds);
+                            }
+                           
+                            matchparticipent.Add(a);
+
+                        }
+
+                        con.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("An exception occurred:");
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.StackTrace);
+
+                    }
+                    match.matchPArticipentTeams = matchparticipent;
+                }
+            }
+            return allRounds;
+
+        }
+        public matchClass getParantmatchByID(int matchID, List<List<matchClass>> allRounds)
+        {
+            matchClass match1 = new matchClass();
+            foreach (List<matchClass> round in allRounds)
+            {
+                foreach (matchClass match in round)
+                { 
+                    if(match.matchId== matchID)
+                    {
+                        match1 = match;
+                    }
+
+                }
+            }
+            return match1;
+        }
         public List<teamClass> getTournamentEnteredTeams(int tournametID)
         {
             List<teamClass> EnteredTeams = new List<teamClass>();
@@ -336,7 +413,7 @@ namespace tournament_system_dotnet.all_class
 
                     foreach (matchParticipentTeamClass entered_team in matchup.matchPArticipentTeams)// save the matchParticipent of current round
                     {
-                        SqlCommand cmd_matchParticipent = new SqlCommand("INSERT INTO dbo.match_participant (match_idd,[match_participant_parent_match(match_id)],[[match_participant_team(team_id)]) OUTPUT INSERTED.match_participant_id VALUES (@match_idd,@match_participant_parent_match,@match_participant_team)", con);
+                        SqlCommand cmd_matchParticipent = new SqlCommand("INSERT INTO dbo.match_participant (match_idd,[match_participant_parent_match(match_id)],[match_participant_team(team_id)]) OUTPUT INSERTED.match_participant_id VALUES (@match_idd,@match_participant_parent_match,@match_participant_team)", con);
 
                         cmd_matchParticipent.Parameters.AddWithValue("@match_idd", matchup.matchId);
                         if (entered_team.parantMatch == null)

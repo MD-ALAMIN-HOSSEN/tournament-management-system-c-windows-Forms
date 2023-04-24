@@ -20,6 +20,7 @@ namespace tournament_system_dotnet
             this.selectedtournament.AllRounds = getAllRounds(selectedtournament);           
             this.selectedtournament.enteredTeams = getAllEnteredTeams(selectedtournament);
             //load team participents
+            this.selectedtournament.AllRounds = x.getAllmatchParticipentAndScore(selectedtournament);
             InitializeComponent();
         }
 

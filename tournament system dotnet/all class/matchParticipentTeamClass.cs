@@ -11,14 +11,14 @@ namespace tournament_system_dotnet.all_class
         /// <summary>
         /// one team of a match
         /// </summary>
-        public teamClass matchParticipentTeam { get; set; }
+        public teamClass? matchParticipentTeam { get; set; }
         /// <summary>
         /// the score of the team
         /// </summary>
-        public int score { get; set; }
+        public int? score { get; set; }
         /// <summary>
         /// which match this team came from as winner
         /// </summary>
-        public matchClass parantMatch { get; set; }
+        public matchClass? parantMatch { get; set; }
     }
 }

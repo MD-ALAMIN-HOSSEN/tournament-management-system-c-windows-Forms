@@ -33,7 +33,7 @@ namespace tournament_system_dotnet
             InitializeComponent();
             wirefrom();
         }
-        private void loadMatchDropdown(int round)
+        private void loadMatchDropdown(int round)// this selects the list of match in round
         {
             //int round = (int)comboBox2.SelectedItem;
             foreach (List<matchClass> roundd in selectedtournament.AllRounds)
@@ -45,7 +45,7 @@ namespace tournament_system_dotnet
                 }
             }
         }
-        private void loadRoundDropdown()
+        private void loadRoundDropdown()// this creats a list of the round number
         {
             rounds = new List<int>();
             rounds.Add(1);
@@ -135,8 +135,60 @@ namespace tournament_system_dotnet
             //wirefrom();
         }
 
+        void loadScore()
+        {
+            matchClass match = (matchClass)comboBox1.SelectedItem;
+            if (match != null)
+            {
+                for (int i = 0; i < match.matchPArticipentTeams.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        if (match.matchPArticipentTeams.ElementAt(0).matchParticipentTeam != null)
+                        {
+                            t1.Text = match.matchPArticipentTeams.ElementAt(0).matchParticipentTeam.teamName;
+                            t1Score.Text = match.matchPArticipentTeams[0].score.ToString();
+                        }
+
+                        else
+                        {
+                            t1.Text = "Not yet set";
+                            t1Score.Text = "";
+                        }
+                    }
+
+                    if (i == 1)
+                    {
+                        if (match.matchPArticipentTeams.ElementAt(1).matchParticipentTeam != null)
+                        {
+                            t2.Text = match.matchPArticipentTeams.ElementAt(1).matchParticipentTeam.teamName;
+                            t2Score.Text = match.matchPArticipentTeams[1].score.ToString();
+                        }
+
+                        else
+                        {
+                            t2.Text = "Not yet set";
+                            t2Score.Text = "";
+                        }
+
+                    }
+                }
+
+            }
+            
+           
+        }
+        void cleanScore()
+        {
+            t1.Text = "Not yet set";
+            t2.Text = "Not yet set";
+            t1Score.Text = "";
+            t2Score.Text = "";
+        }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cleanScore();
+            loadScore();
 
         }
     }

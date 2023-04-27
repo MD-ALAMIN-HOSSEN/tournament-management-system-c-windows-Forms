@@ -16,8 +16,10 @@ namespace tournament_system_dotnet
         sqlConnectionClass x = new sqlConnectionClass();
         List<int> rounds = new List<int>();
         List<matchClass> selectedRound = new List<matchClass>();
+        matchClass match = new matchClass();
         public LoadTournament(tournamentClass selectedtournament__)
         {
+            InitializeComponent();
             this.selectedtournament = selectedtournament__;
             this.selectedtournament.enteredPeizes = getAllPrizees(selectedtournament);
             this.selectedtournament.AllRounds = getAllRounds(selectedtournament);           
@@ -26,11 +28,11 @@ namespace tournament_system_dotnet
             this.selectedtournament.AllRounds = x.getAllmatchParticipentAndScore(selectedtournament);
             loadRoundDropdown();
             loadMatchDropdown(1);
+            loadScore(selectedRound[0]);
 
 
 
-
-            InitializeComponent();
+            
             wirefrom();
         }
         private void loadMatchDropdown(int round)// this selects the list of match in round
@@ -124,7 +126,62 @@ namespace tournament_system_dotnet
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //matchClass match = (matchClass)comboBox1.SelectedItem;
+            int teamOneScore = 0;
+            int teamTwoScore = 0;
+           
+            if (match != null)
+            {
+                for (int i = 0; i < match.matchPArticipentTeams.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        if (match.matchPArticipentTeams.ElementAt(0).matchParticipentTeam != null)
+                        {
+                            int Score;
+                            bool validScore = int.TryParse(t1Score.Text, out Score);
+                            if (validScore)
+                            {
+                                match.matchPArticipentTeams[0].score = Score;
+                                teamOneScore = Score;
+                            }
 
+                        }
+
+                    }
+
+                    if (i == 1)
+                    {
+                        if (match.matchPArticipentTeams.ElementAt(1).matchParticipentTeam != null)
+                        {
+                            int Score;
+                            bool validScore = int.TryParse(t2Score.Text, out Score);
+                            if (validScore)
+                            {
+                                match.matchPArticipentTeams[1].score = Score;
+                                teamTwoScore = Score;
+
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+            if(teamOneScore> teamTwoScore)
+            {
+                match.winner = match.matchPArticipentTeams[0].matchParticipentTeam;
+
+            }
+            else if (teamOneScore < teamTwoScore)
+            {
+                match.winner = match.matchPArticipentTeams[1].matchParticipentTeam;
+            }
+            else
+            {
+                MessageBox.Show("There need to be one winner.");
+            }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -135,9 +192,9 @@ namespace tournament_system_dotnet
             //wirefrom();
         }
 
-        void loadScore()
+        void loadScore(matchClass match)
         {
-            matchClass match = (matchClass)comboBox1.SelectedItem;
+            //matchClass match = (matchClass)comboBox1.SelectedItem;
             if (match != null)
             {
                 for (int i = 0; i < match.matchPArticipentTeams.Count; i++)
@@ -146,7 +203,8 @@ namespace tournament_system_dotnet
                     {
                         if (match.matchPArticipentTeams.ElementAt(0).matchParticipentTeam != null)
                         {
-                            t1.Text = match.matchPArticipentTeams.ElementAt(0).matchParticipentTeam.teamName;
+                            
+                            t1.Text = match.matchPArticipentTeams[0].matchParticipentTeam.teamName;
                             t1Score.Text = match.matchPArticipentTeams[0].score.ToString();
                         }
 
@@ -188,7 +246,10 @@ namespace tournament_system_dotnet
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             cleanScore();
-            loadScore();
+            matchClass match = (matchClass)comboBox1.SelectedItem;
+            this.match = match;
+            loadScore(match);
+            
 
         }
     }

@@ -182,6 +182,7 @@ namespace tournament_system_dotnet
             {
                 MessageBox.Show("There need to be one winner.");
             }
+            x.saveMatchWinner(match);
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)

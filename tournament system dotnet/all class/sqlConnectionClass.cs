@@ -11,6 +11,75 @@ namespace tournament_system_dotnet.all_class
     {
         string connection = "Data Source=LAPTOP-J4FO9U9C\\SQLEXPRESS;Initial Catalog=\"tournament system 2\";Integrated Security=True";
 
+        public void saveMatchWinner(matchClass match)
+        {
+            SqlConnection con = new SqlConnection(connection);
+            SqlCommand com1 = new SqlCommand("UPDATE dbo.match set [match_winner(team_id)]=@match_winner where match_id=@match_idd ", con);
+            com1.Parameters.AddWithValue("@match_idd", match.matchId);
+            com1.Parameters.AddWithValue("@match_winner", match.winner.teamId);
+           // SqlDataReader myreader;
+            try
+            {
+                con.Open();
+                 com1.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            saveMatchScore(match);
+            save_MatchCompiting_id(match);
+        }
+
+        public void save_MatchCompiting_id(matchClass match)
+        {
+            
+                SqlConnection con = new SqlConnection(connection);
+                SqlCommand com1 = new SqlCommand("UPDATE dbo.match_participant SET [match_participant_team(team_id)]=@match_participant_team_id WHERE [match_participant_parent_match(match_id)]=@match_participant_parent_match_id  ", con);
+                com1.Parameters.AddWithValue("@match_participant_team_id", match.winner.teamId);
+                com1.Parameters.AddWithValue("@match_participant_parent_match_id", match.matchId);
+               
+                // SqlDataReader myreader;
+                try
+                {
+                    con.Open();
+                    com1.ExecuteNonQuery();
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            
+
+        }
+        public void saveMatchScore(matchClass match)
+        {
+            foreach (matchParticipentTeamClass item in match.matchPArticipentTeams)
+            {
+                SqlConnection con = new SqlConnection(connection);
+                SqlCommand com1 = new SqlCommand("UPDATE dbo.match_participant set match_participant_score=@match_participant_score where match_idd=@match_idd AND [match_participant_team(team_id)]=@teamid ", con);
+                com1.Parameters.AddWithValue("@match_idd", match.matchId);
+                com1.Parameters.AddWithValue("@teamid", item.matchParticipentTeam.teamId);
+                com1.Parameters.AddWithValue("@match_participant_score", item.score);
+                // SqlDataReader myreader;
+                try
+                {
+                    con.Open();
+                    com1.ExecuteNonQuery();
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            
+        }
         public List<List<matchClass>>  getAllmatchParticipentAndScore (tournamentClass tournament)
         {
             List<List<matchClass>> allRounds = new List<List<matchClass>>();
@@ -144,7 +213,7 @@ namespace tournament_system_dotnet.all_class
                         if (myreader["match_winner(team_id)"] != DBNull.Value)
                         {
                             // get winer team id 
-                            int winer_team_id = myreader.GetInt32("[match_winner(team_id)]");
+                            int winer_team_id = myreader.GetInt32("match_winner(team_id)");
                             //load team add to the match
                             a.winner = getTeamById(winer_team_id);
                         }

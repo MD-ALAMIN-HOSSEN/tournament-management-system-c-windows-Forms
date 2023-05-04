@@ -74,7 +74,7 @@ namespace tournament_system_dotnet
         }
         void wireMatchName()
         {
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
             comboBox1.DataSource = null;
             comboBox1.DataSource = selectedRound;
             comboBox1.DisplayMember = "matchName";
@@ -182,7 +182,13 @@ namespace tournament_system_dotnet
             {
                 MessageBox.Show("There need to be one winner.");
             }
-            x.saveMatchWinner(match);
+            x.saveMatchWinner(match);/////////////////////////
+            //this.selectedtournament.AllRounds = getAllRounds(selectedtournament);
+            this.selectedtournament.AllRounds = x.getAllmatchParticipentAndScore(selectedtournament);
+            int roundselected = (int)comboBox2.SelectedItem;
+            loadMatchDropdown(roundselected);
+            wireMatchName();
+            loadScore(match);
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)

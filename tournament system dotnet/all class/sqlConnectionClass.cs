@@ -11,6 +11,46 @@ namespace tournament_system_dotnet.all_class
     {
         string connection = "Data Source=LAPTOP-J4FO9U9C\\SQLEXPRESS;Initial Catalog=\"tournament system 2\";Integrated Security=True";
 
+        public void updateTournamentStatus(int tournamentId)
+        {
+            int status = 0;
+            SqlConnection con = new SqlConnection(connection);
+            SqlCommand com1 = new SqlCommand("UPDATE dbo.tournament set tournament_status=@tournament_status where tournament_id=@tournament_id ", con);
+            com1.Parameters.AddWithValue("@tournament_status", status);
+            com1.Parameters.AddWithValue("@tournament_id", tournamentId);
+            // SqlDataReader myreader;
+            try
+            {
+                con.Open();
+                com1.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void updateCurrentRound(int tournamentId,int a)
+        {
+            SqlConnection con = new SqlConnection(connection);
+            SqlCommand com1 = new SqlCommand("UPDATE dbo.tournament set tournament_current_round=@tournament_current_round where tournament_id=@tournament_id ", con);
+            com1.Parameters.AddWithValue("@tournament_current_round", a);
+            com1.Parameters.AddWithValue("@tournament_id", tournamentId);
+            // SqlDataReader myreader;
+            try
+            {
+                con.Open();
+                com1.ExecuteNonQuery();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         public void saveMatchWinner(matchClass match)
         {
             SqlConnection con = new SqlConnection(connection);

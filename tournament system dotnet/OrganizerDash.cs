@@ -35,13 +35,18 @@ namespace tournament_system_dotnet
         }
         public OrganizerDash(string a,int x)
         {
-            InitializeComponent();
             user = a;
             Id = x;
+            loadForm();
+          
+        }
+        private void loadForm()
+        {
+            InitializeComponent();
+            //user = a;
+            //Id = x;
             getallTournament(Id);
-            wireforme();/////////////////////////////////////////
-            //MessageBox.Show(Id.ToString());
-            // MessageBox.Show(user);
+            wireforme();
         }
         void getallTournament(int ID) 
         {
@@ -68,6 +73,7 @@ namespace tournament_system_dotnet
             this.Hide();
             Create_new_tournament forme = new Create_new_tournament(Id);
             forme.ShowDialog();
+            forme.Close();
             this.Show();
             getallTournament(Id);
             wireforme();
@@ -93,7 +99,8 @@ namespace tournament_system_dotnet
             this.Hide();
             d1.ShowDialog();
             this.Show();
-
+            getallTournament(Id);
+            wireforme();
 
         }
 
@@ -109,7 +116,7 @@ namespace tournament_system_dotnet
 
         private void OrganizerDash_Load(object sender, EventArgs e)
         {
-
+            //Application.Exit();
         }
     }
 }

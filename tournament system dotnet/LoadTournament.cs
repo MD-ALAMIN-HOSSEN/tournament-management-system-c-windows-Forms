@@ -20,20 +20,27 @@ namespace tournament_system_dotnet
         public LoadTournament(tournamentClass selectedtournament__)
         {
             InitializeComponent();
+            winner.Visible = false;
             this.selectedtournament = selectedtournament__;
             this.selectedtournament.enteredPeizes = getAllPrizees(selectedtournament);
-            this.selectedtournament.AllRounds = getAllRounds(selectedtournament);           
+            this.selectedtournament.AllRounds = getAllRounds(selectedtournament);
             this.selectedtournament.enteredTeams = getAllEnteredTeams(selectedtournament);
             //load team participents
             this.selectedtournament.AllRounds = x.getAllmatchParticipentAndScore(selectedtournament);
+            //show number of round
             loadRoundDropdown();
-            loadMatchDropdown(1);
+            //show all the matches
+            loadMatchDropdown(selectedtournament.TournamentCurrentRound);
+            //load score
             loadScore(selectedRound[0]);
+           ///show if there is a winner
+            if (selectedRound[0].winner != null)
+            {
+                ifMatchWasUpDates(selectedRound[0]);
+            }
 
-
-
-            
             wirefrom();
+            comboBox2.SelectedIndex = selectedtournament.TournamentCurrentRound - 1;
         }
         private void loadMatchDropdown(int round)// this selects the list of match in round
         {
@@ -52,13 +59,13 @@ namespace tournament_system_dotnet
             rounds = new List<int>();
             rounds.Add(1);
             int currentRound = 1;
-            foreach (List<matchClass> round  in selectedtournament.AllRounds)
+            foreach (List<matchClass> round in selectedtournament.AllRounds)
             {
                 if (round.First().matchRound > currentRound)
                 {
                     currentRound = round.First().matchRound;
                     rounds.Add(currentRound);
-                    
+
                 }
             }
         }
@@ -105,7 +112,7 @@ namespace tournament_system_dotnet
         public List<prizeClass> getAllPrizees(tournamentClass tournamet)
         {
             List<prizeClass> prizes = new List<prizeClass>();
-            prizes= x.getAllOrganizerPrizeForTurnament(tournamet.tournamentId);
+            prizes = x.getAllOrganizerPrizeForTurnament(tournamet.tournamentId);
             return prizes;
         }
 
@@ -126,10 +133,13 @@ namespace tournament_system_dotnet
 
         private void button1_Click(object sender, EventArgs e)
         {
+            matchClass match = (matchClass)comboBox1.SelectedItem;
+            this.match = match;
+
             //matchClass match = (matchClass)comboBox1.SelectedItem;
             int teamOneScore = 0;
             int teamTwoScore = 0;
-           
+
             if (match != null)
             {
                 for (int i = 0; i < match.matchPArticipentTeams.Count; i++)
@@ -169,7 +179,7 @@ namespace tournament_system_dotnet
                 }
 
             }
-            if(teamOneScore> teamTwoScore)
+            if (teamOneScore > teamTwoScore)
             {
                 match.winner = match.matchPArticipentTeams[0].matchParticipentTeam;
 
@@ -182,13 +192,46 @@ namespace tournament_system_dotnet
             {
                 MessageBox.Show("There need to be one winner.");
             }
-            x.saveMatchWinner(match);/////////////////////////
-            //this.selectedtournament.AllRounds = getAllRounds(selectedtournament);
+
+            x.saveMatchWinner(match);
+            //reload the forme
+            reload_After_save();
+            //updating current round if round is over
+            if_round_is_complete();
+            if (match.winner != null)
+            {
+                ifMatchWasUpDates(match);
+            }
+        }
+        private void reload_After_save()
+        {
             this.selectedtournament.AllRounds = x.getAllmatchParticipentAndScore(selectedtournament);
             int roundselected = (int)comboBox2.SelectedItem;
             loadMatchDropdown(roundselected);
             wireMatchName();
             loadScore(match);
+
+        }
+        private void if_round_is_complete()
+        {
+            bool b = false;
+            int a = selectedtournament.TournamentCurrentRound;
+            bool allHasWinner = selectedtournament.AllRounds[a - 1].All(x => x.winner != null);
+            if (allHasWinner)
+            {
+                a += 1;
+                if (a > selectedtournament.TournamentRound)
+                {
+                    x.updateTournamentStatus(selectedtournament.tournamentId);
+                }
+                else
+                {
+                    selectedtournament.TournamentCurrentRound = a;
+                    x.updateCurrentRound(selectedtournament.tournamentId, a);
+                }
+
+            }
+
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -196,7 +239,13 @@ namespace tournament_system_dotnet
             int roundselected = (int)comboBox2.SelectedItem;
             loadMatchDropdown(roundselected);
             wireMatchName();
-            //wirefrom();
+
+            reload_score_comboBox1();
+            //cleanScore();
+            //matchClass match = (matchClass)comboBox1.SelectedItem;
+            //this.match = match;
+            //loadScore(match);
+
         }
 
         void loadScore(matchClass match)
@@ -210,15 +259,29 @@ namespace tournament_system_dotnet
                     {
                         if (match.matchPArticipentTeams.ElementAt(0).matchParticipentTeam != null)
                         {
-                            
+
                             t1.Text = match.matchPArticipentTeams[0].matchParticipentTeam.teamName;
                             t1Score.Text = match.matchPArticipentTeams[0].score.ToString();
+                            
+                                t1.Visible = true;
+                                t1Score.Visible = true;
+                                label7.Visible= true;
+                            
+                            t2.Visible = false;
+                            t2Score.Visible = false;
+                            label6.Visible = false;
+                            label8.Visible = false;
                         }
 
                         else
                         {
                             t1.Text = "Not yet set";
                             t1Score.Text = "";
+                            t1.Visible = false;
+                            t1Score.Visible = false;
+                            label7.Visible = false;
+                            //t1.Visible = false;
+                            //t1Score.Visible = false;
                         }
                     }
 
@@ -228,20 +291,28 @@ namespace tournament_system_dotnet
                         {
                             t2.Text = match.matchPArticipentTeams.ElementAt(1).matchParticipentTeam.teamName;
                             t2Score.Text = match.matchPArticipentTeams[1].score.ToString();
+                            t2.Visible = true;
+                            t2Score.Visible = true;
+                            t1.Visible = true;
+                            t1Score.Visible = true;
+                            label6.Visible = true;
+                            label8.Visible = true;
                         }
 
                         else
                         {
                             t2.Text = "Not yet set";
                             t2Score.Text = "";
+                            //t2.Visible = false;
+                            //t2Score.Visible = false;
                         }
 
                     }
                 }
 
             }
-            
-           
+
+
         }
         void cleanScore()
         {
@@ -250,14 +321,30 @@ namespace tournament_system_dotnet
             t1Score.Text = "";
             t2Score.Text = "";
         }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void reload_score_comboBox1()
         {
+            winner.Visible = false;
             cleanScore();
             matchClass match = (matchClass)comboBox1.SelectedItem;
             this.match = match;
             loadScore(match);
-            
+            if (match.winner!=null)
+            {
+                ifMatchWasUpDates(match);
+            }
 
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            reload_score_comboBox1();
+
+        }
+        private void ifMatchWasUpDates (matchClass match)
+        {
+            string winnerText="The winner of this match is : " + match.winner.teamName;
+            winner.Text= winnerText;
+            winner.Visible = true;
         }
     }
 }

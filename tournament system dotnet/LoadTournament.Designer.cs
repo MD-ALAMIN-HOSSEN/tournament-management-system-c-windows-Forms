@@ -42,6 +42,7 @@ namespace tournament_system_dotnet
             this.t2Score = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.winner = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -166,11 +167,21 @@ namespace tournament_system_dotnet
             this.comboBox2.TabIndex = 12;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
+            // winner
+            // 
+            this.winner.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.winner.Location = new System.Drawing.Point(183, 384);
+            this.winner.Name = "winner";
+            this.winner.Size = new System.Drawing.Size(378, 46);
+            this.winner.TabIndex = 13;
+            this.winner.Text = "label4";
+            // 
             // LoadTournament
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 505);
+            this.Controls.Add(this.winner);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.t2Score);
@@ -206,5 +217,6 @@ namespace tournament_system_dotnet
         private System.Windows.Forms.TextBox t2Score;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label winner;
     }
 }

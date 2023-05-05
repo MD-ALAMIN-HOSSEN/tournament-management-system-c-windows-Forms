@@ -17,6 +17,8 @@ namespace tournament_system_dotnet
         List<int> rounds = new List<int>();
         List<matchClass> selectedRound = new List<matchClass>();
         matchClass match = new matchClass();
+        int score11 ;
+        int score22;
         public LoadTournament(tournamentClass selectedtournament__)
         {
             InitializeComponent();
@@ -130,77 +132,120 @@ namespace tournament_system_dotnet
         {
 
         }
+        private bool validateInput()
+        {
+            bool b = false;
+            if (match.matchPArticipentTeams.Count == 1)
+            {
+                string input = t1Score.Text;
+                int number;
+
+                if (int.TryParse(input, out number))
+                {
+                    // input is an integer, and its value is stored in the 'number' variable
+                    //Console.WriteLine("The input is an integer.");
+                    b = true;
+                    
+                }
+            }
+            if (match.matchPArticipentTeams.Count == 2)
+            {
+                string input1 = t1Score.Text;
+                int number1;
+
+                string input = t2Score.Text;
+                int number;
+
+                if (int.TryParse(input, out number)&& int.TryParse(input1, out number1))
+                {
+                    // input is an integer, and its value is stored in the 'number' variable
+                    //Console.WriteLine("The input is an integer.");
+                    b = true;
+                    
+                }
+
+            }
+            return b;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             matchClass match = (matchClass)comboBox1.SelectedItem;
             this.match = match;
-
-            //matchClass match = (matchClass)comboBox1.SelectedItem;
-            int teamOneScore = 0;
-            int teamTwoScore = 0;
-
-            if (match != null)
+            if (validateInput())
             {
-                for (int i = 0; i < match.matchPArticipentTeams.Count; i++)
+                //matchClass match = (matchClass)comboBox1.SelectedItem;
+                int teamOneScore = 0;
+                int teamTwoScore = 0;
+
+                if (match != null)
                 {
-                    if (i == 0)
+                    for (int i = 0; i < match.matchPArticipentTeams.Count; i++)
                     {
-                        if (match.matchPArticipentTeams.ElementAt(0).matchParticipentTeam != null)
+                        if (i == 0)
                         {
-                            int Score;
-                            bool validScore = int.TryParse(t1Score.Text, out Score);
-                            if (validScore)
+                            if (match.matchPArticipentTeams.ElementAt(0).matchParticipentTeam != null)
                             {
-                                match.matchPArticipentTeams[0].score = Score;
-                                teamOneScore = Score;
-                            }
-
-                        }
-
-                    }
-
-                    if (i == 1)
-                    {
-                        if (match.matchPArticipentTeams.ElementAt(1).matchParticipentTeam != null)
-                        {
-                            int Score;
-                            bool validScore = int.TryParse(t2Score.Text, out Score);
-                            if (validScore)
-                            {
-                                match.matchPArticipentTeams[1].score = Score;
-                                teamTwoScore = Score;
+                                int Score;
+                                bool validScore = int.TryParse(t1Score.Text, out Score);
+                                if (validScore)
+                                {
+                                    match.matchPArticipentTeams[0].score = Score;
+                                    teamOneScore = Score;
+                                }
 
                             }
 
                         }
 
+                        if (i == 1)
+                        {
+                            if (match.matchPArticipentTeams.ElementAt(1).matchParticipentTeam != null)
+                            {
+                                int Score;
+                                bool validScore = int.TryParse(t2Score.Text, out Score);
+                                if (validScore)
+                                {
+                                    match.matchPArticipentTeams[1].score = Score;
+                                    teamTwoScore = Score;
+
+                                }
+
+                            }
+
+                        }
                     }
+
+                }
+                if (teamOneScore > teamTwoScore)
+                {
+                    match.winner = match.matchPArticipentTeams[0].matchParticipentTeam;
+
+                }
+                else if (teamOneScore < teamTwoScore)
+                {
+                    match.winner = match.matchPArticipentTeams[1].matchParticipentTeam;
+                }
+                else
+                {
+                    MessageBox.Show("There need to be one winner.");
                 }
 
-            }
-            if (teamOneScore > teamTwoScore)
-            {
-                match.winner = match.matchPArticipentTeams[0].matchParticipentTeam;
-
-            }
-            else if (teamOneScore < teamTwoScore)
-            {
-                match.winner = match.matchPArticipentTeams[1].matchParticipentTeam;
+                x.saveMatchWinner(match);
+                //reload the forme
+                reload_After_save();
+                //updating current round if round is over
+                if_round_is_complete();
+                if (match.winner != null)
+                {
+                    ifMatchWasUpDates(match);
+                }
             }
             else
             {
-                MessageBox.Show("There need to be one winner.");
-            }
-
-            x.saveMatchWinner(match);
-            //reload the forme
-            reload_After_save();
-            //updating current round if round is over
-            if_round_is_complete();
-            if (match.winner != null)
-            {
-                ifMatchWasUpDates(match);
+                MessageBox.Show("The score has to be an integer!!!..");
+                t1Score.Text = score11.ToString();
+                t2Score.Text = score22.ToString();
             }
         }
         private void reload_After_save()
@@ -262,6 +307,11 @@ namespace tournament_system_dotnet
 
                             t1.Text = match.matchPArticipentTeams[0].matchParticipentTeam.teamName;
                             t1Score.Text = match.matchPArticipentTeams[0].score.ToString();
+                            if (match.matchPArticipentTeams[0].score .HasValue)
+                            {
+                                score11 = (int)match.matchPArticipentTeams[0].score;
+
+                            }
                             
                                 t1.Visible = true;
                                 t1Score.Visible = true;
@@ -291,6 +341,11 @@ namespace tournament_system_dotnet
                         {
                             t2.Text = match.matchPArticipentTeams.ElementAt(1).matchParticipentTeam.teamName;
                             t2Score.Text = match.matchPArticipentTeams[1].score.ToString();
+                            if (match.matchPArticipentTeams[1].score!=null)
+                            {
+                                score22 = (int)match.matchPArticipentTeams[1].score;
+                            }
+                            
                             t2.Visible = true;
                             t2Score.Visible = true;
                             t1.Visible = true;

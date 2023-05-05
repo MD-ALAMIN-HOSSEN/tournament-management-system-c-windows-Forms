@@ -170,9 +170,9 @@ namespace tournament_system_dotnet
             // winner
             // 
             this.winner.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.winner.Location = new System.Drawing.Point(183, 384);
+            this.winner.Location = new System.Drawing.Point(80, 391);
             this.winner.Name = "winner";
-            this.winner.Size = new System.Drawing.Size(378, 46);
+            this.winner.Size = new System.Drawing.Size(512, 57);
             this.winner.TabIndex = 13;
             this.winner.Text = "label4";
             // 

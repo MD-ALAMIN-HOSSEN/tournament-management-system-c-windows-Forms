@@ -13,6 +13,12 @@ namespace tournament_system_dotnet
     {
         public static string user = "not data for user";
         sqlConnectionClass x = new sqlConnectionClass();
+        List<tournamentClass> tournamentRunning = new List<tournamentClass>();
+        List<tournamentClass> tournamentFinished = new List<tournamentClass>();
+        List<tournamentClass> allTournaments = new List<tournamentClass>();
+        List<int> teamIdList=new List<int>();//part of team
+        List<int> tournamentIdList = new List<int>();//part of tournament
+
         public static int Id = 2000;
         /// <summary>
         /// ///////////////////////////
@@ -22,8 +28,58 @@ namespace tournament_system_dotnet
             InitializeComponent();
             user = a;
             Id = x;
-            //MessageBox.Show(Id.ToString());
-            //MessageBox.Show(user);
+            getteamId(Id);
+            getteamId_toutnament(teamIdList);
+            get_runing_and_finishied_tournament();
+            wirefrom();
+        }
+        private void wirefrom() 
+        {
+            listBox1.SelectedIndexChanged -= listBox1_SelectedIndexChanged;
+            listBox1.DataSource = null;
+            listBox1.DataSource = tournamentRunning;
+
+            listBox1.DisplayMember = "tournamentName";
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            listBox2.SelectedIndexChanged -= listBox2_SelectedIndexChanged;
+            listBox2.DataSource = null;
+            listBox2.DataSource = tournamentFinished;
+            listBox2.DisplayMember = "tournamentName";
+            listBox2.SelectedIndexChanged += listBox2_SelectedIndexChanged;
+        }
+        private void get_runing_and_finishied_tournament()//gets all tournament player is associated with
+        {
+            foreach (int tournamentId in tournamentIdList)
+            {
+                tournamentClass a = new tournamentClass();
+                a = x.get_tournament_BY_tournament_ID(tournamentId);
+                allTournaments.Add(a);
+            }
+            fill_RUning_And_Finished();
+        }
+        private void fill_RUning_And_Finished()//fills  running and finished list
+        {
+            foreach (tournamentClass tournament in allTournaments)
+            {
+                if (tournament.TournamentStatus==0)
+                {
+                    tournamentFinished.Add(tournament);
+                }
+                if (tournament.TournamentStatus == 1)
+                {
+                    tournamentRunning.Add(tournament);
+                }
+            }
+        }
+        private void getteamId_toutnament(List<int> teamIdList)
+        {
+           
+            tournamentIdList = x.get_all_tournaments_for_teamId_list(teamIdList);
+
+        }
+        private  void getteamId(int Id)
+        {
+            teamIdList = x.get_teamID_by_playerId(Id);
         }
         public PlayerDash(string a)
         {
@@ -63,6 +119,21 @@ namespace tournament_system_dotnet
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tournamentClass selectedtournament = (tournamentClass)listBox2.SelectedItem;
+            Load_Finished_Match d1 = new Load_Finished_Match(selectedtournament);
+
+            this.Hide();
+            d1.ShowDialog();
+            this.Show();
         }
     }
 }

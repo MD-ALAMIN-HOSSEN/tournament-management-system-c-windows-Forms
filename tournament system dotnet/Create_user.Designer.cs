@@ -63,7 +63,7 @@ namespace tournament_system_dotnet
             "Player"});
             this.Userx.Location = new System.Drawing.Point(304, 262);
             this.Userx.Name = "Userx";
-            this.Userx.Size = new System.Drawing.Size(186, 28);
+            this.Userx.Size = new System.Drawing.Size(212, 28);
             this.Userx.TabIndex = 23;
             this.Userx.Text = "select user (compulsory)";
             // 
@@ -134,7 +134,8 @@ namespace tournament_system_dotnet
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(382, 327);
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(366, 316);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(133, 69);
             this.button1.TabIndex = 14;

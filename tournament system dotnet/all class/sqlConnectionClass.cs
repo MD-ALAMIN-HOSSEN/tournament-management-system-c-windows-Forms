@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using System.Linq;
 
 namespace tournament_system_dotnet.all_class
 
@@ -11,6 +12,105 @@ namespace tournament_system_dotnet.all_class
     {
         string connection = "Data Source=LAPTOP-J4FO9U9C\\SQLEXPRESS;Initial Catalog=\"tournament system 2\";Integrated Security=True";
 
+        public tournamentClass get_tournament_BY_tournament_ID(int tournamentId)
+        {
+            tournamentClass tournament = new tournamentClass();
+            SqlConnection con = new SqlConnection(connection);
+            con.Open();
+            SqlCommand cmd12 = new SqlCommand(" SELECT *  FROM dbo.tournament  where tournament_id=@tournament_id ", con);
+            cmd12.Parameters.AddWithValue("@tournament_id", tournamentId);
+            SqlDataReader myreader;
+            try
+            {
+                myreader = cmd12.ExecuteReader();
+                while (myreader.Read())
+                {
+                    tournament.tournamentId = tournamentId;
+                    tournament.tournamentName=myreader.GetString("tournament_name");
+                    tournament.OrganizerId = myreader.GetInt32("organizer_id");
+                    tournament.TournamentRound = myreader.GetInt32("tournament_round");
+                    tournament.TournamentStatus= myreader.GetInt32("tournament_status");
+                    tournament.TournamentCurrentRound= myreader.GetInt32("tournament_current_round");
+                }
+                myreader.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            con.Close();
+            return tournament;
+        }
+        
+
+        
+        public List<int> get_all_tournaments_for_teamId_list(List<int> TeamIdList)
+        {
+            List<int> tournamentIdList = new List<int>();
+            SqlConnection con = new SqlConnection(connection);
+            con.Open();
+            SqlCommand cmd12 = new SqlCommand(" SELECT *  FROM dbo.tournament_teams  where team_id=@team_id ", con);
+            SqlDataReader myreader;
+            foreach (int teamId in TeamIdList)
+            {
+                cmd12.Parameters.Clear();
+                cmd12.Parameters.AddWithValue("@team_id", teamId);
+
+               
+               
+                try
+                {
+                    myreader = cmd12.ExecuteReader();
+                    while (myreader.Read())
+                    {
+
+                        tournamentIdList.Add(myreader.GetInt32("tournament_id"));
+                    }
+                    myreader.Close();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            con.Close();
+            List<int> distinctList = tournamentIdList.Distinct().ToList();
+            return distinctList;
+        }
+        public List<int> get_teamID_by_playerId(int PlayerId)
+        {
+            List<int> teamId=new List<int>();
+            //int x = -1;
+            //playerClass a = new playerClass();
+            //a.playerId = playerid;
+            SqlConnection conn = new SqlConnection(connection);
+            
+
+            SqlCommand cmd12 = new SqlCommand(" SELECT *  FROM dbo.team_member  where player_id=@player_id ", conn);
+            cmd12.Parameters.AddWithValue("@player_id", PlayerId);
+
+            
+            SqlDataReader myreader; 
+            conn.Open();
+            try
+            {
+                myreader = cmd12.ExecuteReader();
+                while (myreader.Read())
+                {
+                    
+                    teamId.Add(myreader.GetInt32("team_id"));
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            conn.Close();
+              return teamId;
+        }
         public void updateTournamentStatus(int tournamentId)
         {
             int status = 0;
@@ -343,7 +443,7 @@ namespace tournament_system_dotnet.all_class
             return prizes;
         }
 
-        public List<tournamentClass> getAllTournamentForOrganizerfinishied(int ID)//load tournament for selected organizer finised
+        public List<tournamentClass> getAllTournamentForOrganizerfinishied(int ID)// Id is organiger id//load tournament for selected organizer finised
         {
            
             List<tournamentClass> tournament = new List<tournamentClass>();

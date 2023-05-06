@@ -102,5 +102,10 @@ namespace tournament_system_dotnet
         {
             this.Close();
         }
+
+        private void Tournament_Name_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

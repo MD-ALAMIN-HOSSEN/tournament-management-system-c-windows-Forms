@@ -36,6 +36,7 @@ namespace tournament_system_dotnet
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,12 +52,13 @@ namespace tournament_system_dotnet
             // 
             // Tournament_Name
             // 
-            this.Tournament_Name.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Tournament_Name.Location = new System.Drawing.Point(47, 9);
+            this.Tournament_Name.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Tournament_Name.Location = new System.Drawing.Point(211, 23);
             this.Tournament_Name.Name = "Tournament_Name";
-            this.Tournament_Name.Size = new System.Drawing.Size(442, 55);
+            this.Tournament_Name.Size = new System.Drawing.Size(442, 41);
             this.Tournament_Name.TabIndex = 1;
             this.Tournament_Name.Text = "label1";
+            this.Tournament_Name.Click += new System.EventHandler(this.Tournament_Name_Click);
             // 
             // lable2
             // 
@@ -100,11 +102,21 @@ namespace tournament_system_dotnet
             this.dataGridView1.Size = new System.Drawing.Size(620, 254);
             this.dataGridView1.TabIndex = 6;
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(38, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(167, 41);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Tournament  :";
+            // 
             // Load_Finished_Match
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -129,5 +141,6 @@ namespace tournament_system_dotnet
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
     }
 }

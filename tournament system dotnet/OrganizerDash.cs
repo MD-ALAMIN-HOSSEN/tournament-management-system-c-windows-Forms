@@ -106,12 +106,12 @@ namespace tournament_system_dotnet
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)//for finished tournament
         {
-            //tournamentClass selectedtournament = (tournamentClass)listBox1.SelectedItem;
-            //LoadTournament d1 = new LoadTournament(selectedtournament);
+            tournamentClass selectedtournament = (tournamentClass)listBox2.SelectedItem;
+            Load_Finished_Match d1 = new Load_Finished_Match(selectedtournament);
 
-            //this.Hide();
-            //d1.ShowDialog();
-            //this.Show();
+            this.Hide();
+            d1.ShowDialog();
+            this.Show();
         }
 
         private void OrganizerDash_Load(object sender, EventArgs e)

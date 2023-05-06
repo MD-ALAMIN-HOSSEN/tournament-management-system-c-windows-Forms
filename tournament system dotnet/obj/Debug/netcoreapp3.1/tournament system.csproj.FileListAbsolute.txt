@@ -30,3 +30,4 @@ C:\Users\Acer\Desktop\github tournament managment ripo\tournament-management-sys
 C:\Users\Acer\Desktop\github tournament managment ripo\tournament-management-system-c-windows-Forms\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system.dll
 C:\Users\Acer\Desktop\github tournament managment ripo\tournament-management-system-c-windows-Forms\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system.pdb
 C:\Users\Acer\Desktop\github tournament managment ripo\tournament-management-system-c-windows-Forms\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament system.genruntimeconfig.cache
+C:\Users\Acer\Desktop\github tournament managment ripo\tournament-management-system-c-windows-Forms\tournament system dotnet\obj\Debug\netcoreapp3.1\tournament_system_dotnet.Load_Finished_Match.resources

@@ -43,6 +43,7 @@ namespace tournament_system_dotnet
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.Image = global::tournament_system_dotnet.Properties.Resources.back_icon;
             this.pictureBox1.Location = new System.Drawing.Point(36, 20);
             this.pictureBox1.Name = "pictureBox1";
@@ -54,6 +55,7 @@ namespace tournament_system_dotnet
             // 
             // Passwordx
             // 
+            this.Passwordx.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Passwordx.Location = new System.Drawing.Point(275, 122);
             this.Passwordx.Name = "Passwordx";
             this.Passwordx.Size = new System.Drawing.Size(334, 27);
@@ -61,6 +63,7 @@ namespace tournament_system_dotnet
             // 
             // Emailx
             // 
+            this.Emailx.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Emailx.Location = new System.Drawing.Point(275, 169);
             this.Emailx.Name = "Emailx";
             this.Emailx.Size = new System.Drawing.Size(334, 27);
@@ -68,6 +71,7 @@ namespace tournament_system_dotnet
             // 
             // numberx
             // 
+            this.numberx.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.numberx.Location = new System.Drawing.Point(275, 211);
             this.numberx.Name = "numberx";
             this.numberx.Size = new System.Drawing.Size(334, 27);
@@ -75,6 +79,7 @@ namespace tournament_system_dotnet
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(200, 210);
             this.label4.Name = "label4";
@@ -84,6 +89,7 @@ namespace tournament_system_dotnet
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(200, 169);
             this.label3.Name = "label3";
@@ -93,6 +99,7 @@ namespace tournament_system_dotnet
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(200, 122);
             this.label2.Name = "label2";
@@ -102,6 +109,7 @@ namespace tournament_system_dotnet
             // 
             // Update
             // 
+            this.Update.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Update.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Update.Location = new System.Drawing.Point(275, 280);
             this.Update.Name = "Update";
@@ -113,6 +121,7 @@ namespace tournament_system_dotnet
             // 
             // Delete
             // 
+            this.Delete.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Delete.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Delete.Location = new System.Drawing.Point(436, 280);
             this.Delete.Name = "Delete";

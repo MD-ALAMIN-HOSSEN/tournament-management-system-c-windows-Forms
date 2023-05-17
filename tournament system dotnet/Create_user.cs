@@ -28,7 +28,7 @@ namespace tournament_system_dotnet
                         playerClass model = new playerClass(Namex.Text, Passwordx.Text, Emailx.Text, numberx.Text);
 
                         sqlConnectionClass a = new sqlConnectionClass();
-                        MessageBox.Show("Player created.");
+                        //MessageBox.Show("Player created.");
                         model = a.createUsernPlayer(model);
 
                         string number = model.playerId.ToString();
@@ -43,7 +43,7 @@ namespace tournament_system_dotnet
                         organizerClass model2 = new organizerClass(Namex.Text, Passwordx.Text, Emailx.Text, numberx.Text);
 
                         sqlConnectionClass a = new sqlConnectionClass();
-                        MessageBox.Show("Organizer created.");
+                        //MessageBox.Show("Organizer created.");
                         model2 = a.createUsernOrganizer(model2);
 
                         string number = model2.organizerId.ToString();
@@ -164,7 +164,7 @@ namespace tournament_system_dotnet
 
         private void Create_user_Load(object sender, EventArgs e)
         {
-
+            //Application.Exit();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

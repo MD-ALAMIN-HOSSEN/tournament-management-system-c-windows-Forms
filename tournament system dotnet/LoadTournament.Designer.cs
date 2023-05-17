@@ -47,6 +47,7 @@ namespace tournament_system_dotnet
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(46, 9);
             this.label1.Name = "label1";
@@ -57,6 +58,7 @@ namespace tournament_system_dotnet
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(58, 89);
             this.label2.Name = "label2";
@@ -66,6 +68,7 @@ namespace tournament_system_dotnet
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(58, 143);
             this.label3.Name = "label3";
@@ -75,6 +78,7 @@ namespace tournament_system_dotnet
             // 
             // t1
             // 
+            this.t1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.t1.AutoSize = true;
             this.t1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.t1.Location = new System.Drawing.Point(153, 254);
@@ -86,6 +90,7 @@ namespace tournament_system_dotnet
             // 
             // t2
             // 
+            this.t2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.t2.AutoSize = true;
             this.t2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.t2.Location = new System.Drawing.Point(645, 254);
@@ -96,6 +101,7 @@ namespace tournament_system_dotnet
             // 
             // label6
             // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.label6.Location = new System.Drawing.Point(425, 304);
@@ -106,6 +112,7 @@ namespace tournament_system_dotnet
             // 
             // label7
             // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label7.Location = new System.Drawing.Point(43, 309);
@@ -116,6 +123,7 @@ namespace tournament_system_dotnet
             // 
             // label8
             // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label8.Location = new System.Drawing.Point(535, 304);
@@ -126,6 +134,7 @@ namespace tournament_system_dotnet
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.Location = new System.Drawing.Point(634, 378);
             this.button1.Name = "button1";
@@ -137,6 +146,7 @@ namespace tournament_system_dotnet
             // 
             // t1Score
             // 
+            this.t1Score.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.t1Score.Location = new System.Drawing.Point(130, 313);
             this.t1Score.Name = "t1Score";
             this.t1Score.Size = new System.Drawing.Size(147, 27);
@@ -144,6 +154,7 @@ namespace tournament_system_dotnet
             // 
             // t2Score
             // 
+            this.t2Score.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.t2Score.Location = new System.Drawing.Point(622, 310);
             this.t2Score.Name = "t2Score";
             this.t2Score.Size = new System.Drawing.Size(147, 27);
@@ -151,6 +162,7 @@ namespace tournament_system_dotnet
             // 
             // comboBox1
             // 
+            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(153, 142);
             this.comboBox1.Name = "comboBox1";
@@ -160,6 +172,7 @@ namespace tournament_system_dotnet
             // 
             // comboBox2
             // 
+            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(153, 88);
             this.comboBox2.Name = "comboBox2";
@@ -169,6 +182,7 @@ namespace tournament_system_dotnet
             // 
             // winner
             // 
+            this.winner.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.winner.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.winner.Location = new System.Drawing.Point(80, 391);
             this.winner.Name = "winner";

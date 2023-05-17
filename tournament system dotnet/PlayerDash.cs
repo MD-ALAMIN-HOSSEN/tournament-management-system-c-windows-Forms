@@ -135,5 +135,15 @@ namespace tournament_system_dotnet
             d1.ShowDialog();
             this.Show();
         }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

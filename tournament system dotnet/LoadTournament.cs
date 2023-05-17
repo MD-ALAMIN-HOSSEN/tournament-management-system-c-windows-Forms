@@ -401,5 +401,15 @@ namespace tournament_system_dotnet
             winner.Text= winnerText;
             winner.Visible = true;
         }
+
+        private void tableLayoutPanel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
